@@ -1,17 +1,48 @@
-/* This code adds CSS to style the canvas and body.*/
-/* style.css */
+/* Basic styles for body and canvas */
 body, html {
-    margin: 0;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #000;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #000;
 }
-  
+
 canvas {
-    display: block;
-    width: 100vw;
-    height: 100vh;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Info panel for displaying planet information */
+#info-panel {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+#info-panel h1 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+#info-panel p {
+  font-size: 1em;
+  margin-top: 10px;
+}
+
+/* Make it responsive on mobile devices */
+@media (max-width: 600px) {
+  #info-panel {
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    font-size: 0.9em;
+  }
 }
