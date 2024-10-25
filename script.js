@@ -50,12 +50,19 @@ planets.forEach((planet) => {
 camera.position.z = 50;
 
 // Animation loop
+let previousTime = Date.now();
+
 function animate() {
     requestAnimationFrame(animate);
 
+    // Calculate delta time for consistent speed
+    const currentTime = Date.now();
+    const deltaTime = (currentTime - previousTime) / 1000;  // Convert to seconds
+    previousTime = currentTime;
+
     // Rotate each planet around the Sun
     planets.forEach((planet) => {
-        const angle = Date.now() * planet.speed;
+        const angle = deltaTime * planet.mesh.userData.speed * 100;  // Multiply to control speed
         planet.mesh.position.x = Math.cos(angle) * planet.mesh.userData.distance;
         planet.mesh.position.z = Math.sin(angle) * planet.mesh.userData.distance;
     });
