@@ -1,3 +1,4 @@
+// This code sets up Three.js scene, camera, and renderer.
 // script.js
 import * as THREE from 'three';
 
