@@ -1,4 +1,5 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.128.0';
+import { OrbitControls } from 'https://cdn.skypack.dev/three/examples/jsm/controls/OrbitControls.js';
 
 // Setup scene, camera, and renderer
 const scene = new THREE.Scene();
@@ -7,38 +8,41 @@ const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('sola
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 // Add lighting
-const light = new THREE.PointLight(0xffffff, 2, 100);
-light.position.set(0, 0, 0);
-scene.add(light);
+const sunLight = new THREE.PointLight(0xffffff, 2, 100);
+scene.add(sunLight);
 
-// Optionally add ambient light
+// Add ambient light for better visibility
 const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
 scene.add(ambientLight);
 
-// Create the Sun
+// Load textures for planets and space background
+const textureLoader = new THREE.TextureLoader();
+const earthTexture = textureLoader.load('path/to/earth_texture.jpg'); // Add path to planet textures
+const marsTexture = textureLoader.load('path/to/mars_texture.jpg');
+const spaceTexture = textureLoader.load('path/to/star_background.jpg');
+
+// Set the starry background
+scene.background = spaceTexture;
+
+// Create the Sun with a glow effect
 const sunGeometry = new THREE.SphereGeometry(3, 32, 32);
 const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xffdd00 });
 const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 scene.add(sun);
 
-// Define planet properties
+// Add the planets with textures
 const planets = [
-    { name: "Mercury", size: 0.5, color: 0xaaaaaa, distance: 5, speed: 0.02 },
-    { name: "Venus", size: 0.9, color: 0xffdd44, distance: 7, speed: 0.015 },
-    { name: "Earth", size: 1, color: 0x0066ff, distance: 10, speed: 0.01 },
-    { name: "Mars", size: 0.8, color: 0xff5500, distance: 13, speed: 0.008 },
-    { name: "Jupiter", size: 2, color: 0xffa07a, distance: 17, speed: 0.005 },
-    { name: "Saturn", size: 1.8, color: 0xffddaa, distance: 22, speed: 0.004 },
-    { name: "Uranus", size: 1.2, color: 0x66ccff, distance: 26, speed: 0.003 },
-    { name: "Neptune", size: 1.2, color: 0x3333ff, distance: 30, speed: 0.002 }
+    { name: "Earth", size: 1, texture: earthTexture, distance: 10, speed: 0.01 },
+    { name: "Mars", size: 0.8, texture: marsTexture, distance: 13, speed: 0.008 }
+    // Add other planets with textures as needed
 ];
 
-// Create planet meshes
 planets.forEach((planet) => {
     const geometry = new THREE.SphereGeometry(planet.size, 32, 32);
-    const material = new THREE.MeshPhongMaterial({ color: planet.color });
+    const material = new THREE.MeshPhongMaterial({ map: planet.texture });
     const mesh = new THREE.Mesh(geometry, material);
-    
+
+    // Set initial position of the planet
     mesh.position.x = planet.distance;
     mesh.userData = { distance: planet.distance, speed: planet.speed, angle: 0 };
     mesh.name = planet.name;
@@ -47,10 +51,16 @@ planets.forEach((planet) => {
     planet.mesh = mesh;
 });
 
-// Camera position
+// Add OrbitControls for zooming, panning, and rotating
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableZoom = true;
+controls.minDistance = 10;
+controls.maxDistance = 100;
+
+// Set the camera position
 camera.position.z = 50;
 
-// Animation loop
+// Animation loop for orbits
 let previousTime = Date.now();
 
 function animate() {
@@ -84,9 +94,28 @@ window.addEventListener('click', (event) => {
 
     if (intersects.length > 0) {
         const clickedPlanet = intersects[0].object;
-        alert(`You clicked on ${clickedPlanet.name}`);
+        displayPlanetInfo(clickedPlanet.name);
     }
 });
+
+// Display planet information in the info panel
+function displayPlanetInfo(planetName) {
+    const infoPanel = document.getElementById('info-panel');
+    const planetInfo = getPlanetInfo(planetName);  // Fetch planet details
+    infoPanel.style.display = 'block';
+    document.getElementById('planet-name').innerText = planetName;
+    document.getElementById('planet-details').innerText = planetInfo;
+}
+
+// Fetch planet information
+function getPlanetInfo(planetName) {
+    const planetDetails = {
+        Earth: "Earth is the third planet from the Sun and the only astronomical object known to harbor life.",
+        Mars: "Mars is the fourth planet from the Sun and is often called the 'Red Planet' due to its reddish appearance."
+        // Add details for other planets
+    };
+    return planetDetails[planetName] || "Unknown planet";
+}
 
 // Handle window resizing
 window.addEventListener('resize', () => {
