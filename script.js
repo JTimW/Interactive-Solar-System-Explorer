@@ -6,38 +6,36 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('solar-system-canvas') });
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x000000);  // Make sure background is black
 
-// Add lighting
-const sunLight = new THREE.PointLight(0xffffff, 5, 200);  // Increase intensity
-sunLight.position.set(0, 0, 0);  // Make sure it's centered
-scene.add(sunLight);
+// Basic Cube to test rendering
+const geometry = new THREE.BoxGeometry(5, 5, 5);
+const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });  // Simple green material
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
 
-// Add ambient light to ensure planets are visible even in low light
-const ambientLight = new THREE.AmbientLight(0x404040, 1.0);
-scene.add(ambientLight);
+// Position the camera so it's in front of the cube
+camera.position.z = 20;
 
-// Test planets without textures first
-const earthGeometry = new THREE.SphereGeometry(1, 32, 32);
-const earthMaterial = new THREE.MeshBasicMaterial({ color: 0x0066ff });  // Simple color material
-const earth = new THREE.Mesh(earthGeometry, earthMaterial);
-earth.position.x = 10;
-scene.add(earth);
+// Add a simple point light (although not needed for MeshBasicMaterial)
+const light = new THREE.PointLight(0xffffff, 1);
+light.position.set(10, 10, 10);
+scene.add(light);
 
-// Set the camera position
-camera.position.z = 50;
-
-// Add OrbitControls
+// Add OrbitControls for interaction
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableZoom = true;
-controls.minDistance = 10;
-controls.maxDistance = 100;
 
 // Animation loop
 function animate() {
     requestAnimationFrame(animate);
-    earth.rotation.y += 0.01;  // Rotate Earth to see some movement
+
+    // Rotate cube for visibility
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+
     renderer.render(scene, camera);
 }
+
 animate();
 
 // Handle window resizing
