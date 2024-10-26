@@ -48,7 +48,10 @@ const planetsData = [
 const planets = planetsData.map((planetData) => {
     const geometry = new THREE.SphereGeometry(planetData.size, 32, 32);
     const material = planetData.name === "Sun" 
-        ? new THREE.MeshBasicMaterial({ color: planetData.color })
+        ? new THREE.MeshPhongMaterial({ 
+              emissive: 0xffff00,    // Glowing yellow color
+              emissiveIntensity: 2   // You can adjust this for desired glow level
+          }) 
         : new THREE.MeshPhongMaterial({ map: planetTextures[planetData.name] });
 
     const mesh = new THREE.Mesh(geometry, material);
