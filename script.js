@@ -116,16 +116,18 @@ controls.enableZoom = true;
 controls.minDistance = 10;
 controls.maxDistance = 100;
 
-// Smooth zoom function to move camera to planet
+// Smooth zoom function to move camera to planet and display information
 function zoomToPlanet(planetName) {
     const selectedPlanet = planets.find(planet => planet.name === planetName);
-    if (!selectedPlanet) return;
+    if (!selectedPlanet) return; // Exit if no planet is selected
 
     const targetPosition = new THREE.Vector3(
         selectedPlanet.mesh.position.x,
         selectedPlanet.mesh.position.y,
-        selectedPlanet.mesh.position.z + 5
+        selectedPlanet.mesh.position.z + 5 // Offset to avoid zooming too close
     );
+
+    console.log("Zooming to planet:", planetName, "Target position:", targetPosition);
 
     new TWEEN.Tween(camera.position)
         .to({ x: targetPosition.x, y: targetPosition.y, z: targetPosition.z }, 2000)
@@ -137,9 +139,10 @@ function zoomToPlanet(planetName) {
 
     controls.target.copy(selectedPlanet.mesh.position);
     controls.update();
+
 }
 
-// Animate planets and update the scene
+    // Include TWEEN.js animation update in the animation loop
 function animate() {
     requestAnimationFrame(animate);
 
@@ -152,11 +155,26 @@ function animate() {
         }
     });
 
-    TWEEN.update();
+    TWEEN.update(); // Update TWEEN animations
+
     renderer.render(scene, camera);
 }
 
-// Start the animation loop
+// Animation loop
+function animate() {
+    requestAnimationFrame(animate);
+
+    planets.forEach((planet) => {
+        if (planet.distance > 0) {
+            planet.mesh.userData.angle += planet.speed;
+            planet.mesh.position.x = Math.cos(planet.mesh.userData.angle) * planet.distance;
+            planet.mesh.position.z = Math.sin(planet.mesh.userData.angle) * planet.distance;
+            planet.mesh.rotation.y += 0.01;
+        }
+    });
+    renderer.render(scene, camera);
+}
+
 animate();
 
 // Handle window resizing
@@ -329,4 +347,3 @@ function getPlanetInfo(planetName) {
     };
     return planetDetails[planetName] || "Unknown planet";
 }
-
