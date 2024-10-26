@@ -1,19 +1,26 @@
 /* Basic styling for the page */
 body, html {
     margin: 0;
+    padding: 0;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #000;
+    background-color: #000; /* Dark background for space ambiance */
+    font-family: Arial, sans-serif;
     flex-direction: column;
 }
 
-canvas {
+/* Fullscreen canvas for the solar system visualization */
+canvas#solar-system-canvas {
     display: block;
     width: 100vw;
-    height: calc(100vh - 80px); /* Adjust height to account for title space */
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Ensures it stays behind UI elements */
 }
 
 /* Decorative title styling */
@@ -21,7 +28,7 @@ canvas {
     position: absolute;
     top: 20px;
     left: 20px;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair Display', serif; /* Add Google font if used */
     font-size: 1.8em;
     color: #f5f5f5;
     text-shadow: 0px 0px 6px rgba(245, 245, 245, 0.2);
@@ -30,10 +37,10 @@ canvas {
     pointer-events: none;
 }
 
-/* Styling for the planet dropdown selector */
+/* Dropdown styling for planet selection */
 #planet-selector {
-    position: fixed;
-    top: 60px; /* Position below the title */
+    position: absolute;
+    top: 60px; /* Positioned below the title */
     left: 20px;
     padding: 8px 12px;
     font-size: 16px;
@@ -53,44 +60,32 @@ canvas {
 
 /* Styling for the info panel */
 #info-panel {
-    display: none;
-    position: absolute;
+    display: none; /* Initially hidden */
+    position: fixed;
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
     color: #fff;
     padding: 20px;
     max-width: 80%;
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
-    font-family: 'Arial', sans-serif;
     font-size: 1em;
     line-height: 1.6;
     z-index: 10;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 /* Show the panel when the 'show' class is added */
 #info-panel.show {
-    opacity: 1;
     display: block;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
 
-/* Style for the planet name (header) */
-#info-panel h1 {
-    margin: 0 0 10px 0;
-    font-size: 1.5em;
-}
-
-/* Style for the planet description */
-#info-panel p {
-    font-size: 1em;
-    margin: 0;
-}
-
-/* Optional close button styling */
+/* Close button styling */
 #info-panel button#close-btn {
     background: none;
     border: none;
@@ -100,17 +95,31 @@ canvas {
     top: 10px;
     right: 15px;
     cursor: pointer;
+    outline: none;
+}
+
+/* Style for the planet name (header) */
+#info-panel h1 {
+    margin: 0 0 10px 0;
+    font-size: 1.5em;
+    color: #f5f5f5;
+}
+
+/* Style for the planet description */
+#info-panel p {
+    font-size: 1em;
+    margin: 0;
 }
 
 /* Styling for the 'Read more' and 'Read less' links */
 #info-panel a#read-more, #info-panel a#read-less {
-    color: #0f9dff;
+    color: #0f9dff; /* Light blue for visibility */
     cursor: pointer;
     font-size: 0.9em;
     text-decoration: underline;
 }
 
-/* Adjustments for smaller screens */
+/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
     #info-panel {
         max-width: 95%;
