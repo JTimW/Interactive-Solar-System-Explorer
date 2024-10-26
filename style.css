@@ -1,4 +1,4 @@
-/* Basic styling for body and canvas */
+/* Basic styling for the page */
 body, html {
     margin: 0;
     overflow: hidden;
@@ -15,40 +15,25 @@ canvas {
     height: 100vh;
 }
 
-/* Dropdown styling */
-#planet-select {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    padding: 8px;
-    font-size: 16px;
-    z-index: 10;
-    background-color: #ffffff;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Info Panel styling */
+/* Styling for the info panel */
 #info-panel {
     display: none; /* Hidden initially */
     position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: #ffffff;
-    padding: 20px;
-    max-width: 80%;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
-    font-family: 'Arial', sans-serif;
+    bottom: 30px; /* Positioned at the bottom of the screen */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Centering */
+    background: rgba(0, 0, 0, 0.8); /* Dark, semi-transparent background */
+    color: #fff; /* White text for contrast */
+    padding: 20px; /* Padding inside the panel */
+    max-width: 80%; /* Responsive maximum width */
+    border-radius: 10px; /* Smooth rounded corners */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Subtle shadow for depth */
+    font-family: 'Arial', sans-serif; /* Clean, modern font */
     font-size: 1em;
-    line-height: 1.6;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.5s ease;
+    line-height: 1.6; /* Improved readability */
+    z-index: 10; /* Ensure it appears above other elements */
+    opacity: 0; /* Initially transparent for fade effect */
+    transition: opacity 0.5s ease; /* Smooth fade-in/out transitions */
 }
 
 /* Show the panel when the 'show' class is added */
@@ -57,20 +42,19 @@ canvas {
     display: block;
 }
 
-/* Planet name styling */
+/* Style for the planet name (header) */
 #info-panel h1 {
-    margin: 0 0 10px;
+    margin: 0 0 10px 0; /* Space below the name */
     font-size: 1.5em;
-    color: #0f9dff;
 }
 
-/* Description styling */
+/* Style for the planet description */
 #info-panel p {
     font-size: 1em;
     margin: 0;
 }
 
-/* Close button for the info panel */
+/* Optional close button styling */
 #info-panel button#close-btn {
     background: none;
     border: none;
@@ -82,16 +66,15 @@ canvas {
     cursor: pointer;
 }
 
-/* Read more and Read less link styling */
-#info-panel a#read-more,
-#info-panel a#read-less {
-    color: #0f9dff;
+/* Styling for the 'Read more' and 'Read less' links */
+#info-panel a#read-more, #info-panel a#read-less {
+    color: #0f9dff; /* Light blue for visibility */
     cursor: pointer;
     font-size: 0.9em;
     text-decoration: underline;
 }
 
-/* Responsive adjustments */
+/* Adjustments for smaller screens */
 @media (max-width: 768px) {
     #info-panel {
         max-width: 95%;
