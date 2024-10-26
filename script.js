@@ -134,13 +134,10 @@ function zoomToPlanet(planetName) {
         .to({ x: targetPosition.x, y: targetPosition.y, z: targetPosition.z }, 2000) // Duration of 2 seconds
         .easing(TWEEN.Easing.Quadratic.InOut)
         .onUpdate(() => {
-            camera.lookAt(selectedPlanet.mesh.position); // Keep camera focused on the planet
+            controls.target.copy(selectedPlanet.mesh.position);
+            controls.update();
         })
         .start();
-
-    // Update controls target if using OrbitControls
-    controls.target.copy(selectedPlanet.mesh.position);
-    controls.update();
 }
 
 // Include TWEEN.js animation update in the animation loop
@@ -157,22 +154,6 @@ function animate() {
     });
 
     TWEEN.update(); // Update TWEEN animations
-
-    renderer.render(scene, camera);
-}
-
-// Animation loop
-function animate() {
-    requestAnimationFrame(animate);
-
-    planets.forEach((planet) => {
-        if (planet.distance > 0) {
-            planet.mesh.userData.angle += planet.speed;
-            planet.mesh.position.x = Math.cos(planet.mesh.userData.angle) * planet.distance;
-            planet.mesh.position.z = Math.sin(planet.mesh.userData.angle) * planet.distance;
-            planet.mesh.rotation.y += 0.01;
-        }
-    });
 
     renderer.render(scene, camera);
 }
