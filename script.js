@@ -127,24 +127,7 @@ function zoomToPlanet(planetName) {
         selectedPlanet.mesh.position.z + 5 // Offset to avoid zooming too close
     );
 
-    
-// Set camera position and controls
-camera.position.z = 50;
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enableZoom = true;
-controls.minDistance = 10;
-controls.maxDistance = 100;
-
-// Smooth zoom function to move camera to planet and display information
-function zoomToPlanet(planetName) {
-    const selectedPlanet = planets.find(planet => planet.name === planetName);
-    if (!selectedPlanet) return;
-
-    const targetPosition = new THREE.Vector3(
-        selectedPlanet.mesh.position.x,
-        selectedPlanet.mesh.position.y,
-        selectedPlanet.mesh.position.z + 5
-    );
+    console.log("Zooming to planet:", planetName, "Target position:", targetPosition);
 
     new TWEEN.Tween(camera.position)
         .to({ x: targetPosition.x, y: targetPosition.y, z: targetPosition.z }, 2000)
@@ -157,7 +140,6 @@ function zoomToPlanet(planetName) {
     controls.target.copy(selectedPlanet.mesh.position);
     controls.update();
 
-    displayPlanetInfo(planetName);
 }
 
     // Include TWEEN.js animation update in the animation loop
