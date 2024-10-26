@@ -156,6 +156,8 @@ function displayPlanetInfo(planetName) {
     }
 
     infoPanel.style.display = 'block';
+
+    setTimeout(() => infoPanel.classList.add('show'), 10); // Delay for fade-in effect
 }
 
 // Expand description when "Read more" is clicked
