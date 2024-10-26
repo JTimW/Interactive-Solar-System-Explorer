@@ -1,6 +1,3 @@
-import * as THREE from 'https://cdn.skypack.dev/three@0.128.0';
-import { OrbitControls } from 'https://cdn.skypack.dev/three/examples/jsm/controls/OrbitControls.js';
-
 // Setup scene, camera, and renderer
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -53,7 +50,7 @@ planets.forEach((planet) => {
 camera.position.z = 50;
 
 // Add OrbitControls
-const controls = new OrbitControls(camera, renderer.domElement);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableZoom = true;
 controls.minDistance = 10;
 controls.maxDistance = 100;
@@ -123,3 +120,4 @@ function getPlanetInfo(planetName) {
     };
     return planetDetails[planetName] || "Unknown planet";
 }
+
