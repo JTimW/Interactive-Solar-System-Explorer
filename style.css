@@ -17,39 +17,42 @@ canvas {
 
 /* Styling for the info panel */
 #info-panel {
-  display: none;
+  display: none; /* Initially hidden */
   position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  padding: 20px;
-  max-width: 80%;
-  border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
-  font-family: 'Arial', sans-serif;
+  bottom: 30px; /* Positioned at the bottom of the screen */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center the panel */
+  background: rgba(0, 0, 0, 0.8); /* Dark, transparent background */
+  color: #fff; /* White text for contrast */
+  padding: 20px; /* Spacing inside the panel */
+  max-width: 80%; /* Maximum width for responsiveness */
+  border-radius: 10px; /* Rounded corners for a modern look */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Subtle shadow for depth */
+  font-family: 'Arial', sans-serif; /* Clean font */
   font-size: 1em;
-  line-height: 1.6;
-  z-index: 10;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  line-height: 1.6; /* Improve readability */
+  z-index: 10; /* Ensure it appears above other elements */
+  opacity: 0; /* Initial opacity for fade effect */
+  transition: opacity 0.5s ease; /* Smooth fade-in and fade-out transitions */
 }
 
 #info-panel.show {
-  opacity: 1;
+  opacity: 1; /* Show the panel when the .show class is added */
 }
 
+/* Styling for the planet title */
 #info-panel h1 {
-  margin: 0 0 10px 0;
+  margin: 0 0 10px 0; /* Space below the title */
   font-size: 1.5em;
 }
 
+/* Styling for the planet details */
 #info-panel p {
   font-size: 1em;
   margin: 0;
 }
 
+/* Optional close button styling */
 #info-panel button#close-btn {
   background: none;
   border: none;
@@ -61,14 +64,7 @@ canvas {
   cursor: pointer;
 }
 
-/* Styling for the 'Read more' link */
-#info-panel a#read-more {
-  color: #0f9dff;
-  cursor: pointer;
-  font-size: 0.9em;
-  text-decoration: underline;
-}
-
+/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
   #info-panel {
     max-width: 95%;
