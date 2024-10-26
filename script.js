@@ -48,9 +48,10 @@ const planetsData = [
 const planets = planetsData.map((planetData) => {
     const geometry = new THREE.SphereGeometry(planetData.size, 32, 32);
     const material = planetData.name === "Sun" 
-        ? new THREE.MeshStandardMaterial({ 
-              emissive: 0xffff00,
-              emissiveIntensity: 2   // You can adjust this for desired glow level
+        ? new THREE.MeshBasicMaterial({
+              map: planetTextures.Sun,
+              emissive: new THREE.Color(0xffff00),
+              emissiveIntensity: 1.5   // Adjust this for desired glow level
           }) 
         : new THREE.MeshStandardMaterial({ map: planetTextures[planetData.name] });
 
@@ -60,6 +61,14 @@ const planets = planetsData.map((planetData) => {
     mesh.name = planetData.name;
 
     scene.add(mesh);
+
+    if (planetData.distance > 0) {  // Create orbit line for planets, excluding Sun
+        const orbitGeometry = new THREE.RingGeometry(planetData.distance - 0.1, planetData.distance + 0.1, 64);
+        const orbitMaterial = new THREE.MeshBasicMaterial({ color: 0x888888, side: THREE.DoubleSide });
+        const orbit = new THREE.Mesh(orbitGeometry, orbitMaterial);
+        orbit.rotation.x = Math.PI / 2;  // Align to XY plane
+        scene.add(orbit);
+    }
 
     if (planetData.name === "Saturn" || planetData.name === "Uranus") {
         const ringGeometry = new THREE.RingGeometry(planetData.size + 0.5, planetData.size + 1, 32);
