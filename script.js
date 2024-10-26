@@ -61,7 +61,7 @@ const planets = planetsData.map((planetData) => {
     scene.add(mesh);
 
     if (planetData.distance > 0) {  // Create orbit line for planets, excluding Sun
-        const orbitGeometry = new THREE.RingGeometry(planetData.distance - 0.05, planetData.distance + 0.05, 32);
+        const orbitGeometry = new THREE.RingGeometry(planetData.distance - 0.02, planetData.distance + 0.02, 50);
         const orbitMaterial = new THREE.MeshBasicMaterial({ color: 0x888888, side: THREE.DoubleSide });
         const orbit = new THREE.Mesh(orbitGeometry, orbitMaterial);
         orbit.rotation.x = Math.PI / 2;  // Align to XY plane
