@@ -145,10 +145,12 @@ function displayPlanetInfo(planetName) {
 
     // Full description (hidden initially)
     document.getElementById('full-description').innerText = planetInfo;
+    document.getElementById('full-description').style.display = 'none'; // Hide the full description initially
 
     // Show 'Read more' link if the text is truncated
     if (planetInfo.length > 100) {
         document.getElementById('read-more').style.display = 'inline';
+        document.getElementById('read-less').style.display = 'none'; // Hide 'Read less' initially
     } else {
         document.getElementById('read-more').style.display = 'none';
     }
@@ -160,9 +162,19 @@ function displayPlanetInfo(planetName) {
 // Expand description when "Read more" is clicked
 function expandDescription(event) {
     event.preventDefault(); // Prevent default link behavior
-    document.getElementById('short-description').style.display = 'none';
-    document.getElementById('full-description').style.display = 'inline';
+    document.getElementById('short-description').style.display = 'none'; // Hide the short description
+    document.getElementById('full-description').style.display = 'inline'; // Show the full description
     document.getElementById('read-more').style.display = 'none'; // Hide the 'Read more' link
+    document.getElementById('read-less').style.display = 'inline'; // Show the 'Read less' link
+}
+
+// Collapse description when "Read Less" is clicked
+function collapseDescription(event) {
+    event.preventDefault(); // Prevent default link behavior
+    document.getElementById('short-description').style.display = 'inline'; // Show the short description again
+    document.getElementById('full-description').style.display = 'none'; // Hide the full description
+    document.getElementById('read-more').style.display = 'inline'; // Show the 'Read more' link again
+    document.getElementById('read-less').style.display = 'none'; // Hide the 'Read less' link
 }
 
 // Hide the info panel with fade-out effect
