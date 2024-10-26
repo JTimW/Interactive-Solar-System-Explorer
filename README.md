@@ -35,7 +35,7 @@ The Solar System Explorer provides an engaging way to learn about our Solar Syst
 ---
 
 ## 🚀 Live Demo
-Check out the live version here: [**Solar System Explorer**](https://671d5cc4144b1b0008161122--stalwart-semifreddo-fd8384.netlify.app/)
+Check out the live version here: [**Solar System Explorer**](https://671d61f757d0bb0008a01f87--stalwart-semifreddo-fd8384.netlify.app/)
 
 ---
 
