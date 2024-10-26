@@ -1,6 +1,4 @@
-import * as THREE from 'https://cdn.skypack.dev/three@0.128.0';
-import { OrbitControls } from 'https://cdn.skypack.dev/three/examples/jsm/controls/OrbitControls.js';
-import { CSS2DObject } from 'https://cdn.skypack.dev/three/examples/jsm/renderers/CSS2DRenderer.js';
+// No need to import THREE and OrbitControls if they're already in HTML
 
 // Setup scene, camera, and renderer
 const scene = new THREE.Scene();
@@ -73,7 +71,7 @@ const planets = planetsData.map((planetData) => {
 
 // Set camera position and controls
 camera.position.z = 50;
-const controls = new OrbitControls(camera, renderer.domElement);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableZoom = true;
 controls.minDistance = 10;
 controls.maxDistance = 100;
