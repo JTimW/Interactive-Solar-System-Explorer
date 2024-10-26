@@ -118,6 +118,7 @@ controls.maxDistance = 100;
 
 // Smooth zoom function to move camera to planet and display information
 function zoomToPlanet(planetName) {
+    console.log("Zooming to planet:", planetName); // Debugging log
     const selectedPlanet = planets.find(planet => planet.name === planetName);
     if (!selectedPlanet) return; // Exit if no planet is found
 
