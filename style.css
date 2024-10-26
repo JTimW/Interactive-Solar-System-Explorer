@@ -7,12 +7,26 @@ body, html {
     justify-content: center;
     height: 100vh;
     background-color: #000;
+    flex-direction: column;
 }
 
 canvas {
     display: block;
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 80px); /* Adjust height to account for title space */
+}
+
+/* Decorative title styling */
+#title {
+    position: absolute;
+    top: 20px;
+    font-family: 'Playfair Display', serif; /* Beautiful font from Google Fonts */
+    font-size: 2em;
+    color: #FFD700; /* Gold color for a celestial feel */
+    text-shadow: 0px 0px 10px rgba(255, 215, 0, 0.7), 
+                 0px 0px 20px rgba(255, 215, 0, 0.5); /* Soft glow effect */
+    z-index: 10; /* Ensure it appears above other elements */
+    user-select: none; /* Prevent text selection */
 }
 
 /* Styling for the info panel */
