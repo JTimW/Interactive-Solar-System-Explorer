@@ -14,7 +14,7 @@ scene.background = spaceTexture;
 
 // Planet textures
 const planetTextures = {
-    Sun: null,
+    Sun: textureLoader.load('assets/sun_texture.jpg'),
     Mercury: textureLoader.load('assets/mercury_texture.jpg'),
     Venus: textureLoader.load('assets/venus_texture.jpg'),
     Earth: textureLoader.load('assets/earth_texture.jpg'),
