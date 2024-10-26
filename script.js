@@ -1,5 +1,3 @@
-// No need to import THREE and OrbitControls if they're already in HTML
-
 // Setup scene, camera, and renderer
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -33,7 +31,7 @@ scene.add(ambientLight);
 
 // Planet data
 const planetsData = [
-    { name: "Sun", size: 3, distance: 0, speed: 0},
+    { name: "Sun", size: 3, distance: 0, speed: 0 },
     { name: "Mercury", size: 0.3, distance: 5, speed: 0.004 },
     { name: "Venus", size: 0.6, distance: 7, speed: 0.003 },
     { name: "Earth", size: 0.7, distance: 10, speed: 0.002 },
@@ -80,7 +78,6 @@ const planets = planetsData.map((planetData) => {
 
     return { ...planetData, mesh };
 });
-
 
 // Set camera position and controls
 camera.position.z = 50;
@@ -130,6 +127,8 @@ window.addEventListener('click', (event) => {
     if (intersects.length > 0) {
         const clickedPlanet = intersects[0].object;
         displayPlanetInfo(clickedPlanet.name);
+    } else {
+        hidePlanetInfo(); // Hide the info panel if clicked elsewhere
     }
 });
 
@@ -137,15 +136,26 @@ window.addEventListener('click', (event) => {
 function displayPlanetInfo(planetName) {
     const infoPanel = document.getElementById('info-panel');
     const planetInfo = getPlanetInfo(planetName);
-    infoPanel.style.display = 'block';
+
     document.getElementById('planet-name').innerText = planetName;
     document.getElementById('planet-details').innerText = planetInfo;
+    
+    // Show the info panel with fade-in effect
+    infoPanel.style.display = 'block';
+    setTimeout(() => infoPanel.classList.add('show'), 10); // Delay for fade-in effect
+}
+
+// Hide the info panel with fade-out effect
+function hidePlanetInfo() {
+    const infoPanel = document.getElementById('info-panel');
+    infoPanel.classList.remove('show');
+    setTimeout(() => infoPanel.style.display = 'none', 500); // Delay for fade-out effect
 }
 
 // Fetch planet information
 function getPlanetInfo(planetName) {
     const planetDetails = {
-        Sun: "The Sun is a massive, glowing ball of hydrogen and helium at the center of our solar system, providing the energy needed to sustain life on Earth. Its core, where nuclear fusion occurs, generates enormous energy by fusing hydrogen atoms into helium, releasing heat and light that radiates into space. The Sun's surface, called the photosphere, reaches about 5,500 degrees Celsius (9,932 degrees Fahrenheit), while temperatures in its core soar to over 15 million degrees Celsius. This energy drives Earth's climate and weather systems, influencing everything from photosynthesis in plants to the formation of weather patterns. As a star, the Sun is about halfway through its life cycle, estimated to last roughly 10 billion years, and it has already been shining for about 4.6 billion years.",
+        Sun: "The Sun is a massive, glowing ball of hydrogen and helium at the center of our solar system...",
         Mercury: "Mercury is the closest planet to the Sun.",
         Venus: "Venus has a thick atmosphere and is the second planet from the Sun.",
         Earth: "Earth is the only planet known to support life.",
