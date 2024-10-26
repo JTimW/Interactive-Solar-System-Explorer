@@ -77,8 +77,8 @@ const planets = planetsData.map((planetData) => {
         mesh.add(ring);
     }
     else if (planetData.name === "Uranus") {
-        const ringGeometry = new THREE.RingGeometry(planetData.size + 0.25, planetData.size + 0.5, 32);
-        const ringMaterial = new THREE.MeshBasicMaterial({ color: 0xd2b48c, side: THREE.DoubleSide });
+        const ringGeometry = new THREE.RingGeometry(planetData.size + 0.25, planetData.size + 0.4, 32);
+        const ringMaterial = new THREE.MeshBasicMaterial({ color: '#4B4B4F', side: THREE.DoubleSide });
         const ring = new THREE.Mesh(ringGeometry, ringMaterial);
         ring.rotation.x = Math.PI / 2;
         mesh.add(ring);
