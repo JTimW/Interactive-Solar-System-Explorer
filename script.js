@@ -31,15 +31,15 @@ scene.add(ambientLight);
 
 // Planet data
 const planetsData = [
-    { name: "Sun", size: 3, distance: 0, speed: 0 },
-    { name: "Mercury", size: 0.3, distance: 5, speed: 0.004 },
-    { name: "Venus", size: 0.6, distance: 7, speed: 0.003 },
-    { name: "Earth", size: 0.7, distance: 10, speed: 0.002 },
-    { name: "Mars", size: 0.5, distance: 13, speed: 0.0018 },
-    { name: "Jupiter", size: 1.5, distance: 17, speed: 0.001 },
-    { name: "Saturn", size: 1.2, distance: 22, speed: 0.0008 },
-    { name: "Uranus", size: 1.0, distance: 27, speed: 0.0006 },
-    { name: "Neptune", size: 1.0, distance: 30, speed: 0.0005 }
+    { name: "Sun", size: 10, distance: 0, speed: 0 },
+    { name: "Mercury", size: 0.035, distance: 15, speed: 0.004 },
+    { name: "Venus", size: 0.087, distance: 20, speed: 0.003 },
+    { name: "Earth", size: 0.091, distance: 25, speed: 0.002 },
+    { name: "Mars", size: 0.048, distance: 35, speed: 0.0018 },
+    { name: "Jupiter", size: 1.0, distance: 70, speed: 0.001 },
+    { name: "Saturn", size: 0.83, distance: 100, speed: 0.0008 },
+    { name: "Uranus", size: 0.36, distance: 150, speed: 0.0006 },
+    { name: "Neptune", size: 0.35, distance: 200, speed: 0.0005 }
 ];
 
 // Create Sun and planets
