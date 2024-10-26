@@ -52,7 +52,7 @@ const planets = planetsData.map((planetData) => {
               emissive: textureLoader.load('assets/sun_texture.jpg'),
               emissiveIntensity: 2   // You can adjust this for desired glow level
           }) 
-        : new THREE.MeshPhongMaterial({ map: planetTextures[planetData.name] });
+        : new THREE.MeshStandardMaterial({ map: planetTextures[planetData.name] });
 
     const mesh = new THREE.Mesh(geometry, material);
     mesh.position.x = planetData.distance;
