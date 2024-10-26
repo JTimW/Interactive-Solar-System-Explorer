@@ -59,8 +59,17 @@ const planets = planetsData.map((planetData) => {
     mesh.userData = { distance: planetData.distance, speed: planetData.speed, angle: 0 };
     mesh.name = planetData.name;
 
-    scene.add(mesh);
+// Add orbit lines
+    if (planetData.distance > 0) { // Only add orbits for planets (not the Sun)
+        const orbitGeometry = new THREE.CircleGeometry(planetData.distance, 64);
+        orbitGeometry.vertices.shift(); // Remove center vertex to make it a circle
+        const orbitMaterial = new THREE.LineBasicMaterial({ color: 0xffffff });
+        const orbitLine = new THREE.LineLoop(orbitGeometry, orbitMaterial);
+        orbitLine.rotation.x = Math.PI / 2; // Rotate to lay flat in the XY plane
+        scene.add(orbitLine);
+    }
 
+    // Add rings for Saturn and Uranus
     if (planetData.name === "Saturn" || planetData.name === "Uranus") {
         const ringGeometry = new THREE.RingGeometry(planetData.size + 0.5, planetData.size + 1, 32);
         const ringMaterial = new THREE.MeshBasicMaterial({ color: 0xd2b48c, side: THREE.DoubleSide });
@@ -69,6 +78,7 @@ const planets = planetsData.map((planetData) => {
         mesh.add(ring);
     }
 
+    scene.add(mesh);
     return { ...planetData, mesh };
 });
 
