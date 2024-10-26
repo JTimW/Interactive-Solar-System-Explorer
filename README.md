@@ -1,6 +1,6 @@
 # 🌌 Solar System Explorer
 
-**Solar System Explorer** is a visually immersive 3D web application that allows users to explore the planets, moons, and the Sun in our Solar System interactively. Click on any celestial body to uncover fascinating facts and scientific insights. Built as an educational platform, this project brings the Solar System to life right in your browser.
+**Solar System Explorer** is a visually immersive 3D web application that allows users to explore the planets and the Sun in our Solar System interactively. Click on any celestial body to uncover fascinating facts and scientific insights. Built as an educational platform, this project brings the Solar System to life right in your browser.
 
 ---
 
