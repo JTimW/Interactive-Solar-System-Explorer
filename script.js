@@ -5,10 +5,10 @@ const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('sola
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 
-// Load textures
+// Load background texture
 const textureLoader = new THREE.TextureLoader();
 const spaceTexture = textureLoader.load('assets/star_background.jpg');
-scene.background = spaceTexture;
+scene.background = spaceTexture; // Set background to space texture
 
 // Planet textures
 const planetTextures = {
@@ -23,11 +23,13 @@ const planetTextures = {
     Neptune: textureLoader.load('assets/neptune_texture.jpg')
 };
 
-// Lighting
+// Lighting setup
 const sunLight = new THREE.PointLight(0xffffff, 2, 500);
-scene.add(sunLight);
+sunLight.position.set(0, 0, 0);
+scene.add(sunLight); // Adds sunlight to the center for the Sun's light effect
+
 const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
-scene.add(ambientLight);
+scene.add(ambientLight); // Adds ambient light for overall brightness
 
 // Planet data
 const planetsData = [
@@ -42,7 +44,7 @@ const planetsData = [
     { name: "Neptune", size: 1.2, distance: 63, speed: 0.0005 }
 ];
 
-// Create Sun and planets
+// Create planets and orbits
 const planets = planetsData.map((planetData) => {
     const geometry = new THREE.SphereGeometry(planetData.size, 32, 32);
     const material = planetData.name === "Sun" 
@@ -60,7 +62,7 @@ const planets = planetsData.map((planetData) => {
 
     scene.add(mesh);
 
-    // Optional: Add orbit rings
+    // Optional: Add orbit rings for planets
     if (planetData.distance > 0) {
         const orbitGeometry = new THREE.RingGeometry(planetData.distance - 0.02, planetData.distance + 0.02, 50);
         const orbitMaterial = new THREE.MeshBasicMaterial({ color: 0x888888, side: THREE.DoubleSide });
@@ -73,16 +75,16 @@ const planets = planetsData.map((planetData) => {
 });
 
 // Set camera position and controls
-camera.position.z = 50;
+camera.position.z = 50; // Start camera a bit farther out
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableZoom = true;
 controls.minDistance = 10;
 controls.maxDistance = 100;
 
-// Smooth zoom function to move camera to selected planet
+// Function to zoom to selected planet
 function zoomToPlanet(planetName) {
     const selectedPlanet = planets.find(planet => planet.name === planetName);
-    if (!selectedPlanet) return; // Exit if no planet is selected
+    if (!selectedPlanet) return;
 
     const targetPosition = new THREE.Vector3(
         selectedPlanet.mesh.position.x,
@@ -102,7 +104,7 @@ function zoomToPlanet(planetName) {
     controls.update();
 }
 
-// Include TWEEN.js animation update in the animation loop
+// Animation loop with planet orbits and TWEEN updates
 function animate() {
     requestAnimationFrame(animate);
 
@@ -117,12 +119,12 @@ function animate() {
 
     TWEEN.update(); // Update TWEEN animations
 
-    renderer.render(scene, camera);
+    renderer.render(scene, camera); // Render the scene and camera view
 }
 
-animate();
+animate(); // Start the animation loop
 
-// Handle window resizing
+// Adjust renderer and camera on window resize
 window.addEventListener('resize', () => {
     const width = window.innerWidth;
     const height = window.innerHeight;
