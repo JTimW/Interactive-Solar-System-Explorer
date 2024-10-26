@@ -13,6 +13,7 @@ The Solar System Explorer provides an engaging way to learn about our Solar Syst
 - **🌠 Realistic 3D Visualization**: Experience a true-to-scale model of the Solar System with accurate planetary orbits.
 - **🔍 Informative Pop-ups**: Click on planets, moons, or the Sun to reveal interesting facts and scientific details.
 - **🚀 Intuitive Navigation**: Quickly jump between planets using a dropdown menu, allowing for seamless exploration.
+- **🎶 Background Music**: Enjoy ambient music while exploring the Solar System. Press the **'M' key** to mute or unmute the music, making the experience even more interactive.
 
 ---
 
@@ -21,6 +22,8 @@ The Solar System Explorer provides an engaging way to learn about our Solar Syst
    Open `index.html` in your web browser, or use a local server to start the project.
 2. **Explore**  
    Click on the planets to view detailed information.
+3. **Toggle Music**  
+   If the website is muted or you cannot hear the background music, press the **'M' key** to toggle the music on or off.
 
 ---
 
@@ -32,7 +35,7 @@ The Solar System Explorer provides an engaging way to learn about our Solar Syst
 ---
 
 ## 🚀 Live Demo
-Check out the live version here: [**Solar System Explorer**](https://stalwart-semifreddo-fd8384.netlify.app)
+Check out the live version here: [**Solar System Explorer**](https://671d5cc4144b1b0008161122--stalwart-semifreddo-fd8384.netlify.app/)
 
 ---
 
