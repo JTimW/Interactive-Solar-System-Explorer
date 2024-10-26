@@ -22,7 +22,7 @@ The Solar System Explorer provides an engaging way to learn about our Solar Syst
 1. **Open the App**  
    Open `index.html` in your web browser, or use a local server to start the project.
 2. **Explore**  
-   Use the dropdown menu to select different planets and click on them to view detailed information.
+   Click on the planets to view detailed information.
 
 ---
 
