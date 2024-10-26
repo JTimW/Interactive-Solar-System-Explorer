@@ -108,6 +108,25 @@ const planets = planetsData.map((planetData) => {
     return { ...planetData, mesh };
 });
 
+// Get the audio element and set volume (optional)
+const backgroundMusic = document.getElementById('background-music');
+backgroundMusic.volume = 0.5; // Adjust volume as needed (0.0 to 1.0)
+
+// Start/pause control in case you want to control the music in your app
+function toggleMusic() {
+    if (backgroundMusic.paused) {
+        backgroundMusic.play();
+    } else {
+        backgroundMusic.pause();
+    }
+}
+
+// Add event listener to toggle music on key press (e.g., 'M' key)
+window.addEventListener('keydown', (event) => {
+    if (event.key === 'm' || event.key === 'M') {
+        toggleMusic();
+    }
+});
 
 // Set camera position and controls
 camera.position.z = 50;
