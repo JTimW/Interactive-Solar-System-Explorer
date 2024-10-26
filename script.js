@@ -4,49 +4,58 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('solar-system-canvas') });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-// Load textures for planets and background
+// Load textures
 const textureLoader = new THREE.TextureLoader();
-const earthTexture = textureLoader.load('assets/earth_texture.jpg');  // Path to texture
-const marsTexture = textureLoader.load('assets/mars_texture.jpg');    // Path to texture
-const spaceTexture = textureLoader.load('assets/star_background.jpg'); // Path to background
+const spaceTexture = textureLoader.load('assets/star_background.jpg'); // Background
+const planetTextures = {
+    Sun: new THREE.MeshBasicMaterial({ color: 0xffdd00 }),
+    Mercury: new THREE.MeshPhongMaterial({ map: textureLoader.load('assets/mercury_texture.jpg') }),
+    Venus: new THREE.MeshPhongMaterial({ map: textureLoader.load('assets/venus_texture.jpg') }),
+    Earth: new THREE.MeshPhongMaterial({ map: textureLoader.load('assets/earth_texture.jpg') }),
+    Mars: new THREE.MeshPhongMaterial({ map: textureLoader.load('assets/mars_texture.jpg') }),
+    Jupiter: new THREE.MeshPhongMaterial({ map: textureLoader.load('assets/jupiter_texture.jpg') }),
+    Saturn: new THREE.MeshPhongMaterial({ map: textureLoader.load('assets/saturn_texture.jpg') }),
+    Uranus: new THREE.MeshPhongMaterial({ map: textureLoader.load('assets/uranus_texture.jpg') }),
+    Neptune: new THREE.MeshPhongMaterial({ map: textureLoader.load('assets/neptune_texture.jpg') })
+};
 
 // Set the starry background
 scene.background = spaceTexture;
 
 // Lighting
-const sunLight = new THREE.PointLight(0xffffff, 2, 100);
+const sunLight = new THREE.PointLight(0xffffff, 2, 300);
 scene.add(sunLight);
-const ambientLight = new THREE.AmbientLight(0x404040, 0.5);  // Soft ambient light
+const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
 scene.add(ambientLight);
 
-// Create the Sun
-const sunGeometry = new THREE.SphereGeometry(3, 32, 32);
-const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xffdd00 });
-const sun = new THREE.Mesh(sunGeometry, sunMaterial);
-scene.add(sun);
-
-// Create planets
-const planets = [
-    { name: "Earth", size: 1, texture: earthTexture, distance: 10, speed: 0.01 },
-    { name: "Mars", size: 0.8, texture: marsTexture, distance: 13, speed: 0.008 }
-    // Add more planets with textures as needed
+// Planet data
+const planetsData = [
+    { name: "Sun", size: 3, distance: 0, speed: 0 },
+    { name: "Mercury", size: 0.3, distance: 5, speed: 0.04 },
+    { name: "Venus", size: 0.6, distance: 7, speed: 0.03 },
+    { name: "Earth", size: 0.7, distance: 10, speed: 0.02 },
+    { name: "Mars", size: 0.5, distance: 13, speed: 0.018 },
+    { name: "Jupiter", size: 1.5, distance: 17, speed: 0.01 },
+    { name: "Saturn", size: 1.2, distance: 22, speed: 0.008 },
+    { name: "Uranus", size: 1.0, distance: 27, speed: 0.006 },
+    { name: "Neptune", size: 1.0, distance: 30, speed: 0.005 }
 ];
 
-planets.forEach((planet) => {
-    const geometry = new THREE.SphereGeometry(planet.size, 32, 32);
-    const material = new THREE.MeshPhongMaterial({ map: planet.texture });
+// Create planets and add them to the scene
+const planets = planetsData.map((planetData) => {
+    const geometry = new THREE.SphereGeometry(planetData.size, 32, 32);
+    const material = planetData.name === "Sun" ? planetTextures.Sun : planetTextures[planetData.name];
     const mesh = new THREE.Mesh(geometry, material);
 
-    // Set initial position of the planet
-    mesh.position.x = planet.distance;
-    mesh.userData = { distance: planet.distance, speed: planet.speed, angle: 0 };
-    mesh.name = planet.name;
+    mesh.position.x = planetData.distance;
+    mesh.userData = { distance: planetData.distance, speed: planetData.speed, angle: 0 };
+    mesh.name = planetData.name;
 
     scene.add(mesh);
-    planet.mesh = mesh;
+    return { ...planetData, mesh };
 });
 
-// Camera position
+// Set camera position
 camera.position.z = 50;
 
 // Add OrbitControls
@@ -56,19 +65,15 @@ controls.minDistance = 10;
 controls.maxDistance = 100;
 
 // Animation loop
-let previousTime = Date.now();
-
 function animate() {
     requestAnimationFrame(animate);
 
-    const currentTime = Date.now();
-    const deltaTime = (currentTime - previousTime) / 1000;  // Convert to seconds
-    previousTime = currentTime;
-
     planets.forEach((planet) => {
-        planet.mesh.userData.angle += deltaTime * planet.mesh.userData.speed * 100;
-        planet.mesh.position.x = Math.cos(planet.mesh.userData.angle) * planet.mesh.userData.distance;
-        planet.mesh.position.z = Math.sin(planet.mesh.userData.angle) * planet.mesh.userData.distance;
+        if (planet.distance > 0) { // Skip the Sun
+            planet.mesh.userData.angle += planet.speed;
+            planet.mesh.position.x = Math.cos(planet.mesh.userData.angle) * planet.distance;
+            planet.mesh.position.z = Math.sin(planet.mesh.userData.angle) * planet.distance;
+        }
     });
 
     renderer.render(scene, camera);
@@ -85,7 +90,7 @@ window.addEventListener('resize', () => {
     camera.updateProjectionMatrix();
 });
 
-// Raycasting for detecting clicks
+// Raycasting for detecting clicks on planets
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
@@ -105,7 +110,7 @@ window.addEventListener('click', (event) => {
 // Display planet information in the info panel
 function displayPlanetInfo(planetName) {
     const infoPanel = document.getElementById('info-panel');
-    const planetInfo = getPlanetInfo(planetName);  // Fetch planet details
+    const planetInfo = getPlanetInfo(planetName);
     infoPanel.style.display = 'block';
     document.getElementById('planet-name').innerText = planetName;
     document.getElementById('planet-details').innerText = planetInfo;
@@ -114,10 +119,15 @@ function displayPlanetInfo(planetName) {
 // Fetch planet information
 function getPlanetInfo(planetName) {
     const planetDetails = {
-        Earth: "Earth is the third planet from the Sun and the only astronomical object known to harbor life.",
-        Mars: "Mars is the fourth planet from the Sun and is often called the 'Red Planet' due to its reddish appearance."
-        // Add details for other planets
+        Sun: "The Sun is the star at the center of our Solar System.",
+        Mercury: "Mercury is the closest planet to the Sun.",
+        Venus: "Venus is the second planet from the Sun and has a thick atmosphere.",
+        Earth: "Earth is the third planet from the Sun and the only one known to support life.",
+        Mars: "Mars is the fourth planet from the Sun, known as the Red Planet.",
+        Jupiter: "Jupiter is the largest planet in our Solar System.",
+        Saturn: "Saturn is known for its prominent ring system.",
+        Uranus: "Uranus is tilted on its axis, resulting in extreme seasons.",
+        Neptune: "Neptune is the farthest planet from the Sun."
     };
     return planetDetails[planetName] || "Unknown planet";
 }
-
