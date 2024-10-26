@@ -127,42 +127,38 @@ function zoomToPlanet(planetName) {
         selectedPlanet.mesh.position.z + 5 // Offset to avoid zooming too close
     );
 
-    // Smooth camera transition to planet
+    
+// Set camera position and controls
+camera.position.z = 50;
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableZoom = true;
+controls.minDistance = 10;
+controls.maxDistance = 100;
+
+// Smooth zoom function to move camera to planet and display information
+function zoomToPlanet(planetName) {
+    const selectedPlanet = planets.find(planet => planet.name === planetName);
+    if (!selectedPlanet) return;
+
+    const targetPosition = new THREE.Vector3(
+        selectedPlanet.mesh.position.x,
+        selectedPlanet.mesh.position.y,
+        selectedPlanet.mesh.position.z + 5
+    );
+
     new TWEEN.Tween(camera.position)
-        .to({ x: targetPosition.x, y: targetPosition.y, z: targetPosition.z }, 2000) // Duration of 2 seconds
+        .to({ x: targetPosition.x, y: targetPosition.y, z: targetPosition.z }, 2000)
         .easing(TWEEN.Easing.Quadratic.InOut)
         .onUpdate(() => {
-            camera.lookAt(selectedPlanet.mesh.position); // Keep camera focused on the planet
+            camera.lookAt(selectedPlanet.mesh.position);
         })
         .start();
 
-    // Update controls target if using OrbitControls
     controls.target.copy(selectedPlanet.mesh.position);
     controls.update();
 
-    // Display the information panel for the selected planet
     displayPlanetInfo(planetName);
 }
-
-
-// Include TWEEN.js animation update in the animation loop
-function animate() {
-    requestAnimationFrame(animate);
-
-    planets.forEach((planet) => {
-        if (planet.distance > 0) {
-            planet.mesh.userData.angle += planet.speed;
-            planet.mesh.position.x = Math.cos(planet.mesh.userData.angle) * planet.distance;
-            planet.mesh.position.z = Math.sin(planet.mesh.userData.angle) * planet.distance;
-            planet.mesh.rotation.y += 0.01;
-        }
-    });
-
-    TWEEN.update(); // Update TWEEN animations
-
-    renderer.render(scene, camera);
-}
-
 
 animate();
 
@@ -207,10 +203,8 @@ function displayPlanetInfo(planetName) {
     const planetInfo = getPlanetInfo(planetName);
 
     document.getElementById('planet-name').innerText = planetName;
-
     const shortDescription = planetInfo.length > 100 ? planetInfo.substring(0, 100) + '...' : planetInfo;
     document.getElementById('short-description').innerText = shortDescription;
-
     document.getElementById('full-description').innerText = planetInfo;
     document.getElementById('short-description').style.display = 'inline';
     document.getElementById('full-description').style.display = 'none';
@@ -226,24 +220,21 @@ function displayPlanetInfo(planetName) {
     infoPanel.classList.add('show');
 }
 
-// Expand description when "Read more" is clicked
+// Expand and collapse description
 function expandDescription(event) {
     event.preventDefault();
     document.getElementById('short-description').style.display = 'none';
     document.getElementById('full-description').style.display = 'inline';
     document.getElementById('read-more').style.display = 'none';
     document.getElementById('read-less').style.display = 'inline';
-    document.getElementById('info-panel').style.display = 'block';
 }
 
-// Collapse description when "Read Less" is clicked
 function collapseDescription(event) {
     event.preventDefault();
     document.getElementById('short-description').style.display = 'inline';
     document.getElementById('full-description').style.display = 'none';
     document.getElementById('read-more').style.display = 'inline';
     document.getElementById('read-less').style.display = 'none';
-    document.getElementById('info-panel').style.display = 'block';
 }
 
 // Hide the info panel with fade-out effect
