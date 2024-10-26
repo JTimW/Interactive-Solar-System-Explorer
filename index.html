@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Solar System</title>
-
-    <!-- External CSS for styling -->
+    <style>
+        #planet-select {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            padding: 5px;
+            font-size: 16px;
+            z-index: 10;
+            background-color: white;
+        }
+    </style>
     <link rel="stylesheet" href="style.css">
-
-    <!-- Include necessary Three.js libraries and TWEEN for animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/TWEEN.min.js"></script>
@@ -18,22 +25,7 @@
     <!-- Title for Solar System Explorer -->
     <div id="title">Solar System Explorer</div>
 
-    <!-- Canvas for Three.js rendering -->
     <canvas id="solar-system-canvas"></canvas>
-
-    <!-- Dropdown for selecting planets -->
-    <select id="planet-selector">
-        <option value="">Select a Planet</option>
-        <option value="Sun">Sun</option>
-        <option value="Mercury">Mercury</option>
-        <option value="Venus">Venus</option>
-        <option value="Earth">Earth</option>
-        <option value="Mars">Mars</option>
-        <option value="Jupiter">Jupiter</option>
-        <option value="Saturn">Saturn</option>
-        <option value="Uranus">Uranus</option>
-        <option value="Neptune">Neptune</option>
-    </select>
 
     <!-- Info Panel for displaying planet details -->
     <div id="info-panel">
@@ -47,9 +39,7 @@
         </p>
     </div>
 
-    <audio id="background-music" src="assets/space_music.mp3" loop autoplay></audio>
-
-    <!-- Main JavaScript file -->
+    
     <script src="script.js"></script>
 </body>
 </html>
