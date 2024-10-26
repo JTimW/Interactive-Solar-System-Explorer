@@ -87,10 +87,10 @@ const planets = planetsData.map((planetData) => {
         ring.rotation.x = Math.PI / 2; // Rotate to align with planet
         mesh.add(ring);
         
-    } else if (planetData.name === "Neptune") {
-        const ringGeometry = new THREE.RingGeometry(planetData.size + 0.1, planetData.size + 0.25, 32);
+    } else if (planetData.name === "Uranus") {
+        const ringGeometry = new THREE.RingGeometry(planetData.size + 0.1, planetData.size + 0.3, 32);
         const ringMaterial = new THREE.MeshBasicMaterial({ 
-            color: '#4B4B4F', 
+            color: '#3A3A3C', 
             side: THREE.DoubleSide,
             transparent: true,
             opacity: 0.9
