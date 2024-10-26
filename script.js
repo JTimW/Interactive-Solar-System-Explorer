@@ -88,7 +88,7 @@ const planets = planetsData.map((planetData) => {
         mesh.add(ring);
         
     } else if (planetData.name === "Uranus") {
-        const ringGeometry = new THREE.RingGeometry(planetData.size + 0.5, planetData.size + 1, 32);
+        const ringGeometry = new THREE.RingGeometry(planetData.size + 0.5, planetData.size + 0.8, 32);
 
         // Load the texture for Saturn's ring
         const ringTexture = textureLoader.load('assets/uranusRing_texture.png'); // Specify the correct path to texture file
