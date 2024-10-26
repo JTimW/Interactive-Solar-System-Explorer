@@ -59,7 +59,7 @@ For major changes, please open an issue first to discuss what you would like to 
 ---
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/YourUsername/YourRepositoryName/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/YourUsername/Interactive-Solar-System-Explorer/blob/main/LICENSE) file for details.
 
 ---
 
