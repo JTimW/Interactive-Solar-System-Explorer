@@ -14,17 +14,17 @@
 
     <!-- Info Panel for displaying planet details -->
     <div id="info-panel">
-        <button id="close-btn" onclick="hidePlanetInfo()">X</button> <!-- Close button for hiding the info panel -->
-        <h1 id="planet-name"></h1> <!-- Display the name of the clicked planet -->
+        <button id="close-btn" onclick="hidePlanetInfo()">X</button>
+        <h1 id="planet-name"></h1>
         
         <!-- Planet details with short and full descriptions -->
         <p id="planet-details">
-            <span id="short-description"></span> <!-- Short version of the description -->
-            <span id="full-description" style="display: none;"></span> <!-- Full version, initially hidden -->
+            <span id="short-description"></span>
+            <span id="full-description" style="display: none;"></span>
             
             <!-- 'Read more' and 'Read less' links -->
-            <a href="#" id="read-more" onclick="expandDescription(event)">Read more</a> <!-- Expands the description -->
-            <a href="#" id="read-less" onclick="collapseDescription(event)" style="display: none;">Read less</a> <!-- Collapses the description -->
+            <a href="#" id="read-more" onclick="expandDescription(event)">Read more</a>
+            <a href="#" id="read-less" onclick="collapseDescription(event)" style="display: none;">Read less</a>
         </p>
     </div>
 
