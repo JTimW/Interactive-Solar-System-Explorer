@@ -14,32 +14,54 @@ canvas {
   height: 100vh;
 }
 
+/* Updated info panel styling */
 #info-panel {
-  display: none;
+  display: none; /* Initially hidden */
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 10px;
+  bottom: 30px; /* Positioned at the bottom of the screen */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Centering trick */
+  background: rgba(0, 0, 0, 0.8); /* Dark semi-transparent background */
+  color: #fff; /* White text for better contrast */
+  padding: 20px;
+  max-width: 80%; /* Limit width of the panel */
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Subtle shadow */
+  font-family: 'Arial', sans-serif; /* Clean font choice */
+  font-size: 1em;
+  line-height: 1.6;
+  text-align: left; /* Align text to left */
+  z-index: 10; /* Ensure it appears above other elements */
+  opacity: 0; /* Hidden initially for fade-in effect */
+  transition: opacity 0.5s ease; /* Smooth fade-in and fade-out */
+}
+
+#info-panel.show {
+  opacity: 1; /* When triggered, make it visible */
 }
 
 #info-panel h1 {
-  margin: 0;
-  font-size: 1.2em;
+  margin: 0 0 10px 0;
+  font-size: 1.5em;
 }
 
 #info-panel p {
   font-size: 1em;
-  margin-top: 10px;
+  margin: 0;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  #info-panel {
+    max-width: 95%;
+    font-size: 0.9em;
+    padding: 15px;
+  }
 }
 
 @media (max-width: 600px) {
   #info-panel {
-    top: 10px;
-    right: 10px;
-    padding: 5px;
-    font-size: 0.9em;
+    padding: 10px;
+    font-size: 0.85em;
   }
 }
