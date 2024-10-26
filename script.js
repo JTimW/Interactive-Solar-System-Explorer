@@ -69,8 +69,15 @@ const planets = planetsData.map((planetData) => {
         scene.add(orbit);
     }
 
-    if (planetData.name === "Saturn" || planetData.name === "Uranus") {
+    if (planetData.name === "Saturn") {
         const ringGeometry = new THREE.RingGeometry(planetData.size + 0.5, planetData.size + 1, 32);
+        const ringMaterial = new THREE.MeshBasicMaterial({ color: 0xd2b48c, side: THREE.DoubleSide });
+        const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+        ring.rotation.x = Math.PI / 2;
+        mesh.add(ring);
+    }
+    else if (planetData.name === "Uranus") {
+        const ringGeometry = new THREE.RingGeometry(planetData.size + 0.25, planetData.size + 0.5, 32);
         const ringMaterial = new THREE.MeshBasicMaterial({ color: 0xd2b48c, side: THREE.DoubleSide });
         const ring = new THREE.Mesh(ringGeometry, ringMaterial);
         ring.rotation.x = Math.PI / 2;
