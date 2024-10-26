@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Solar System</title>
+    <style>
+        /* Position the dropdown in the top left */
+        #planet-select {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            padding: 5px;
+            font-size: 16px;
+            z-index: 10; /* Ensure it appears above the canvas */
+            background-color: white; /* Optional: for better visibility */
+        }
+    </style>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
