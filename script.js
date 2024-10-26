@@ -9,9 +9,9 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 
 // Load textures for planets and background
 const textureLoader = new THREE.TextureLoader();
-const earthTexture = textureLoader.load('assets/earth_texture.jpg');  // Replace with actual texture path
-const marsTexture = textureLoader.load('assets/mars_texture.jpg');    // Replace with actual texture path
-const spaceTexture = textureLoader.load('assets/star_background.jpg'); // Replace with actual texture path
+const earthTexture = textureLoader.load('assets/earth_texture.jpg');
+const marsTexture = textureLoader.load('assets/mars_texture.jpg');
+const spaceTexture = textureLoader.load('assets/star_background.jpg');
 
 // Set the starry background
 scene.background = spaceTexture;
