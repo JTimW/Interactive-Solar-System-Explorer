@@ -134,10 +134,13 @@ function zoomToPlanet(planetName) {
         .to({ x: targetPosition.x, y: targetPosition.y, z: targetPosition.z }, 2000) // Duration of 2 seconds
         .easing(TWEEN.Easing.Quadratic.InOut)
         .onUpdate(() => {
-            controls.target.copy(selectedPlanet.mesh.position);
-            controls.update();
+            camera.lookAt(selectedPlanet.mesh.position); // Keep camera focused on the planet
         })
         .start();
+
+     // Update controls target if using OrbitControls
+    controls.target.copy(selectedPlanet.mesh.position);
+    controls.update();
 }
 
 // Include TWEEN.js animation update in the animation loop
