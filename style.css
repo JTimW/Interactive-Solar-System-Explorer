@@ -17,36 +17,37 @@ canvas {
 
 /* Styling for the info panel */
 #info-panel {
-  display: none; /* Initially hidden */
+  display: none; /* Hidden initially */
   position: absolute;
   bottom: 30px; /* Positioned at the bottom of the screen */
   left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Center the panel */
-  background: rgba(0, 0, 0, 0.8); /* Dark, transparent background */
+  transform: translateX(-50%); /* Centering */
+  background: rgba(0, 0, 0, 0.8); /* Dark, semi-transparent background */
   color: #fff; /* White text for contrast */
-  padding: 20px; /* Spacing inside the panel */
-  max-width: 80%; /* Maximum width for responsiveness */
-  border-radius: 10px; /* Rounded corners for a modern look */
+  padding: 20px; /* Padding inside the panel */
+  max-width: 80%; /* Responsive maximum width */
+  border-radius: 10px; /* Smooth rounded corners */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Subtle shadow for depth */
-  font-family: 'Arial', sans-serif; /* Clean font */
+  font-family: 'Arial', sans-serif; /* Clean, modern font */
   font-size: 1em;
-  line-height: 1.6; /* Improve readability */
+  line-height: 1.6; /* Improved readability */
   z-index: 10; /* Ensure it appears above other elements */
-  opacity: 0; /* Initial opacity for fade effect */
-  transition: opacity 0.5s ease; /* Smooth fade-in and fade-out transitions */
+  opacity: 0; /* Initially transparent for fade effect */
+  transition: opacity 0.5s ease; /* Smooth fade-in/out transitions */
 }
 
+/* Show the panel when the 'show' class is added */
 #info-panel.show {
-  opacity: 1; /* Show the panel when the .show class is added */
+  opacity: 1;
 }
 
-/* Styling for the planet title */
+/* Style for the planet name (header) */
 #info-panel h1 {
-  margin: 0 0 10px 0; /* Space below the title */
+  margin: 0 0 10px 0; /* Space below the name */
   font-size: 1.5em;
 }
 
-/* Styling for the planet details */
+/* Style for the planet description */
 #info-panel p {
   font-size: 1em;
   margin: 0;
@@ -64,7 +65,15 @@ canvas {
   cursor: pointer;
 }
 
-/* Responsive adjustments for smaller screens */
+/* Styling for the 'Read more' link */
+#info-panel a#read-more {
+  color: #0f9dff; /* Light blue for visibility */
+  cursor: pointer;
+  font-size: 0.9em;
+  text-decoration: underline;
+}
+
+/* Adjustments for smaller screens */
 @media (max-width: 768px) {
   #info-panel {
     max-width: 95%;
