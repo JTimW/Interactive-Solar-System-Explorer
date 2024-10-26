@@ -98,10 +98,17 @@ function zoomToPlanet(planetName) {
         selectedPlanet.mesh.position.z + 5 // Offset to avoid zooming too close
     );
 
+    console.log("Zooming to planet:", planetName, "Target position:", targetPosition);
+    
     // Create a tween for smooth camera transition
     new TWEEN.Tween(camera.position)
         .to({ x: targetPosition.x, y: targetPosition.y, z: targetPosition.z }, 2000) // Duration of 2 seconds
         .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(() => {
+            camera.lookAt(selectedPlanet.mesh.position); // Keep camera focused on the planet
+            controls.target.copy(selectedPlanet.mesh.position);
+            controls.update();
+        })
         .start();
 
     // Update controls target if using OrbitControls
