@@ -1,3 +1,4 @@
+/* Basic styling for the page */
 body, html {
   margin: 0;
   overflow: hidden;
@@ -14,40 +15,53 @@ canvas {
   height: 100vh;
 }
 
-/* Updated info panel styling */
+/* Styling for the info panel */
 #info-panel {
   display: none; /* Initially hidden */
   position: absolute;
   bottom: 30px; /* Positioned at the bottom of the screen */
   left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Centering trick */
-  background: rgba(0, 0, 0, 0.8); /* Dark semi-transparent background */
-  color: #fff; /* White text for better contrast */
-  padding: 20px;
-  max-width: 80%; /* Limit width of the panel */
-  border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Subtle shadow */
-  font-family: 'Arial', sans-serif; /* Clean font choice */
+  transform: translateX(-50%); /* Center the panel */
+  background: rgba(0, 0, 0, 0.8); /* Dark, transparent background */
+  color: #fff; /* White text for contrast */
+  padding: 20px; /* Spacing inside the panel */
+  max-width: 80%; /* Maximum width for responsiveness */
+  border-radius: 10px; /* Rounded corners for a modern look */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Subtle shadow for depth */
+  font-family: 'Arial', sans-serif; /* Clean font */
   font-size: 1em;
-  line-height: 1.6;
-  text-align: left; /* Align text to left */
+  line-height: 1.6; /* Improve readability */
   z-index: 10; /* Ensure it appears above other elements */
-  opacity: 0; /* Hidden initially for fade-in effect */
-  transition: opacity 0.5s ease; /* Smooth fade-in and fade-out */
+  opacity: 0; /* Initial opacity for fade effect */
+  transition: opacity 0.5s ease; /* Smooth fade-in and fade-out transitions */
 }
 
 #info-panel.show {
-  opacity: 1; /* When triggered, make it visible */
+  opacity: 1; /* Show the panel when the .show class is added */
 }
 
+/* Styling for the planet title */
 #info-panel h1 {
-  margin: 0 0 10px 0;
+  margin: 0 0 10px 0; /* Space below the title */
   font-size: 1.5em;
 }
 
+/* Styling for the planet details */
 #info-panel p {
   font-size: 1em;
   margin: 0;
+}
+
+/* Optional close button styling */
+#info-panel button#close-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2em;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
 }
 
 /* Responsive adjustments for smaller screens */
