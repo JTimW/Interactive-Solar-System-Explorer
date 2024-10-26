@@ -1,90 +1,91 @@
 /* Basic styling for the page */
 body, html {
-  margin: 0;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #000;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #000;
 }
 
 canvas {
-  display: block;
-  width: 100vw;
-  height: 100vh;
+    display: block;
+    width: 100vw;
+    height: 100vh;
 }
 
 /* Styling for the info panel */
 #info-panel {
-  display: none; /* Hidden initially */
-  position: absolute;
-  bottom: 30px; /* Positioned at the bottom of the screen */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Centering */
-  background: rgba(0, 0, 0, 0.8); /* Dark, semi-transparent background */
-  color: #fff; /* White text for contrast */
-  padding: 20px; /* Padding inside the panel */
-  max-width: 80%; /* Responsive maximum width */
-  border-radius: 10px; /* Smooth rounded corners */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Subtle shadow for depth */
-  font-family: 'Arial', sans-serif; /* Clean, modern font */
-  font-size: 1em;
-  line-height: 1.6; /* Improved readability */
-  z-index: 10; /* Ensure it appears above other elements */
-  opacity: 0; /* Initially transparent for fade effect */
-  transition: opacity 0.5s ease; /* Smooth fade-in/out transitions */
+    display: none; /* Hidden initially */
+    position: absolute;
+    bottom: 30px; /* Positioned at the bottom of the screen */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Centering */
+    background: rgba(0, 0, 0, 0.8); /* Dark, semi-transparent background */
+    color: #fff; /* White text for contrast */
+    padding: 20px; /* Padding inside the panel */
+    max-width: 80%; /* Responsive maximum width */
+    border-radius: 10px; /* Smooth rounded corners */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Subtle shadow for depth */
+    font-family: 'Arial', sans-serif; /* Clean, modern font */
+    font-size: 1em;
+    line-height: 1.6; /* Improved readability */
+    z-index: 10; /* Ensure it appears above other elements */
+    opacity: 0; /* Initially transparent for fade effect */
+    transition: opacity 0.5s ease; /* Smooth fade-in/out transitions */
 }
 
 /* Show the panel when the 'show' class is added */
 #info-panel.show {
-  opacity: 1;
+    opacity: 1;
+    display: block;
 }
 
 /* Style for the planet name (header) */
 #info-panel h1 {
-  margin: 0 0 10px 0; /* Space below the name */
-  font-size: 1.5em;
+    margin: 0 0 10px 0; /* Space below the name */
+    font-size: 1.5em;
 }
 
 /* Style for the planet description */
 #info-panel p {
-  font-size: 1em;
-  margin: 0;
+    font-size: 1em;
+    margin: 0;
 }
 
 /* Optional close button styling */
 #info-panel button#close-btn {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.2em;
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2em;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
 }
 
 /* Styling for the 'Read more' and 'Read less' links */
 #info-panel a#read-more, #info-panel a#read-less {
-  color: #0f9dff; /* Light blue for visibility */
-  cursor: pointer;
-  font-size: 0.9em;
-  text-decoration: underline;
+    color: #0f9dff; /* Light blue for visibility */
+    cursor: pointer;
+    font-size: 0.9em;
+    text-decoration: underline;
 }
 
 /* Adjustments for smaller screens */
 @media (max-width: 768px) {
-  #info-panel {
-    max-width: 95%;
-    font-size: 0.9em;
-    padding: 15px;
-  }
+    #info-panel {
+        max-width: 95%;
+        font-size: 0.9em;
+        padding: 15px;
+    }
 }
 
 @media (max-width: 600px) {
-  #info-panel {
-    padding: 10px;
-    font-size: 0.85em;
-  }
+    #info-panel {
+        padding: 10px;
+        font-size: 0.85em;
+    }
 }
