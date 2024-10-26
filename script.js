@@ -108,9 +108,10 @@ const planets = planetsData.map((planetData) => {
     return { ...planetData, mesh };
 });
 
-// Get the audio element and set volume (optional)
-const backgroundMusic = document.getElementById('background-music');
-backgroundMusic.volume = 0.5; // Adjust volume as needed (0.0 to 1.0)
+// Add background music
+const backgroundMusic = new Audio('assets/space_music.mp3');
+backgroundMusic.loop = true;
+backgroundMusic.volume = 0.5;
 
 // Start/pause control in case you want to control the music in your app
 function toggleMusic() {
