@@ -21,34 +21,55 @@ canvas {
     position: absolute;
     top: 20px;
     left: 20px;
-    font-family: 'Playfair Display', serif; /* Beautiful font from Google Fonts */
+    font-family: 'Playfair Display', serif;
     font-size: 1.8em;
-    color: #f5f5f5; /* Gold color for a celestial feel */
-    text-shadow: 0px 0px 6px rgba(245, 245, 245, 0.2); /* Very subtle glow */
-    z-index: 10; /* Ensure it appears above other elements */
-    user-select: none; /* Prevent text selection */
-    pointer-events: none; /* Ensures the title is not clickable */
+    color: #f5f5f5;
+    text-shadow: 0px 0px 6px rgba(245, 245, 245, 0.2);
+    z-index: 10;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Styling for the planet dropdown selector */
+#planet-selector {
+    position: fixed;
+    top: 60px; /* Position below the title */
+    left: 20px;
+    padding: 8px 12px;
+    font-size: 16px;
+    z-index: 10;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+#planet-selector:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Styling for the info panel */
 #info-panel {
-    display: none; /* Hidden initially */
+    display: none;
     position: absolute;
-    bottom: 30px; /* Positioned at the bottom of the screen */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Centering */
-    background: rgba(0, 0, 0, 0.8); /* Dark, semi-transparent background */
-    color: #fff; /* White text for contrast */
-    padding: 20px; /* Padding inside the panel */
-    max-width: 80%; /* Responsive maximum width */
-    border-radius: 10px; /* Smooth rounded corners */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Subtle shadow for depth */
-    font-family: 'Arial', sans-serif; /* Clean, modern font */
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 20px;
+    max-width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+    font-family: 'Arial', sans-serif;
     font-size: 1em;
-    line-height: 1.6; /* Improved readability */
-    z-index: 10; /* Ensure it appears above other elements */
-    opacity: 0; /* Initially transparent for fade effect */
-    transition: opacity 0.5s ease; /* Smooth fade-in/out transitions */
+    line-height: 1.6;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
 /* Show the panel when the 'show' class is added */
@@ -59,7 +80,7 @@ canvas {
 
 /* Style for the planet name (header) */
 #info-panel h1 {
-    margin: 0 0 10px 0; /* Space below the name */
+    margin: 0 0 10px 0;
     font-size: 1.5em;
 }
 
@@ -83,7 +104,7 @@ canvas {
 
 /* Styling for the 'Read more' and 'Read less' links */
 #info-panel a#read-more, #info-panel a#read-less {
-    color: #0f9dff; /* Light blue for visibility */
+    color: #0f9dff;
     cursor: pointer;
     font-size: 0.9em;
     text-decoration: underline;
