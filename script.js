@@ -5,28 +5,33 @@ const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('sola
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 
-// Load textures
+// Load textures with debugging
 const textureLoader = new THREE.TextureLoader();
-const spaceTexture = textureLoader.load('assets/star_background.jpg');
+const spaceTexture = textureLoader.load(
+    'assets/star_background.jpg',
+    () => console.log("Background texture loaded successfully"),
+    undefined,
+    (error) => console.error("Error loading background texture:", error)
+);
 scene.background = spaceTexture;
 
-// Planet textures
+// Planet textures with error logging
 const planetTextures = {
-    Sun: textureLoader.load('assets/sun_texture.jpg'),
-    Mercury: textureLoader.load('assets/mercury_texture.jpg'),
-    Venus: textureLoader.load('assets/venus_texture.jpg'),
-    Earth: textureLoader.load('assets/earth_texture.jpg'),
-    Mars: textureLoader.load('assets/mars_texture.jpg'),
-    Jupiter: textureLoader.load('assets/jupiter_texture.jpg'),
-    Saturn: textureLoader.load('assets/saturn_texture.jpg'),
-    Uranus: textureLoader.load('assets/uranus_texture.jpg'),
-    Neptune: textureLoader.load('assets/neptune_texture.jpg')
+    Sun: textureLoader.load('assets/sun_texture.jpg', null, null, error => console.error("Error loading Sun texture:", error)),
+    Mercury: textureLoader.load('assets/mercury_texture.jpg', null, null, error => console.error("Error loading Mercury texture:", error)),
+    Venus: textureLoader.load('assets/venus_texture.jpg', null, null, error => console.error("Error loading Venus texture:", error)),
+    Earth: textureLoader.load('assets/earth_texture.jpg', null, null, error => console.error("Error loading Earth texture:", error)),
+    Mars: textureLoader.load('assets/mars_texture.jpg', null, null, error => console.error("Error loading Mars texture:", error)),
+    Jupiter: textureLoader.load('assets/jupiter_texture.jpg', null, null, error => console.error("Error loading Jupiter texture:", error)),
+    Saturn: textureLoader.load('assets/saturn_texture.jpg', null, null, error => console.error("Error loading Saturn texture:", error)),
+    Uranus: textureLoader.load('assets/uranus_texture.jpg', null, null, error => console.error("Error loading Uranus texture:", error)),
+    Neptune: textureLoader.load('assets/neptune_texture.jpg', null, null, error => console.error("Error loading Neptune texture:", error))
 };
 
 // Lighting
 const sunLight = new THREE.PointLight(0xffffff, 2, 500);
 scene.add(sunLight);
-const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+const ambientLight = new THREE.AmbientLight(0x404040, 1.0); // Increased intensity for visibility
 scene.add(ambientLight);
 
 // Planet data
@@ -42,7 +47,7 @@ const planetsData = [
     { name: "Neptune", size: 1.2, distance: 63, speed: 0.0005 }
 ];
 
-// Create Sun and planets
+// Create Sun and planets with optional rings
 const planets = planetsData.map((planetData) => {
     const geometry = new THREE.SphereGeometry(planetData.size, 32, 32);
     const material = planetData.name === "Sun" 
@@ -68,29 +73,22 @@ const planets = planetsData.map((planetData) => {
         scene.add(orbit);
     }
 
-    if (planetData.name === "Saturn") {
-        const ringGeometry = new THREE.RingGeometry(planetData.size + 0.5, planetData.size + 1.5, 32);
-        const ringTexture = textureLoader.load('assets/saturnRing_texture1.png');
+    // Saturn and Uranus rings
+    if (planetData.name === "Saturn" || planetData.name === "Uranus") {
+        const ringSize = planetData.name === "Saturn" ? 1.5 : 0.8;
+        const ringGeometry = new THREE.RingGeometry(planetData.size + 0.5, planetData.size + ringSize, 32);
+        const ringTexture = textureLoader.load(
+            `assets/${planetData.name.toLowerCase()}Ring_texture.png`, 
+            () => console.log(`${planetData.name} ring texture loaded successfully`),
+            undefined,
+            error => console.error(`Error loading ${planetData.name} ring texture:`, error)
+        );
         const ringMaterial = new THREE.MeshBasicMaterial({
             map: ringTexture,
             side: THREE.DoubleSide,
             transparent: true,
             opacity: 1
         });
-
-        const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-        ring.rotation.x = Math.PI / 2;
-        mesh.add(ring);
-    } else if (planetData.name === "Uranus") {
-        const ringGeometry = new THREE.RingGeometry(planetData.size + 0.5, planetData.size + 0.8, 32);
-        const ringTexture = textureLoader.load('assets/uranusRing_texture.png');
-        const ringMaterial = new THREE.MeshBasicMaterial({
-            map: ringTexture,
-            side: THREE.DoubleSide,
-            transparent: true,
-            opacity: 1
-        });
-
         const ring = new THREE.Mesh(ringGeometry, ringMaterial);
         ring.rotation.x = Math.PI / 2;
         mesh.add(ring);
@@ -99,15 +97,14 @@ const planets = planetsData.map((planetData) => {
 });
 
 // Set camera position and controls
-camera.position.z = 50;
+camera.position.z = 100; // Further back for a better overview
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableZoom = true;
 controls.minDistance = 10;
-controls.maxDistance = 100;
+controls.maxDistance = 200;
 
 // Smooth zoom function to move camera to planet and display information
 function zoomToPlanet(planetName) {
-    console.log("Zooming to planet:", planetName);
     const selectedPlanet = planets.find(planet => planet.name === planetName);
     if (!selectedPlanet) return;
 
@@ -142,7 +139,7 @@ function animate() {
         }
     });
 
-    TWEEN.update(); 
+    TWEEN.update();
     renderer.render(scene, camera);
 }
 
@@ -239,7 +236,6 @@ function hidePlanetInfo() {
 // Fetch planet information
 function getPlanetInfo(planetName) {
     const planetDetails = {
-        // Your detailed planet information objects
         Sun: "The Sun is a massive, glowing ball of hydrogen and helium at the center...",
         Mercury: "Mercury, the smallest and closest planet to the Sun...",
         Venus: "Venus, the second planet from the Sun and Earth’s “sister planet”...",
