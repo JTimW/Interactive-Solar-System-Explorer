@@ -5,57 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Solar System</title>
     <style>
-        /* Position the dropdown in the top left */
         #planet-select {
             position: fixed;
             top: 10px;
             left: 10px;
             padding: 5px;
             font-size: 16px;
-            z-index: 10; /* Ensure it appears above the canvas */
-            background-color: white; /* Optional: for better visibility */
+            z-index: 10;
+            background-color: white;
         }
     </style>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/TWEEN.min.js"></script>
-
 </head>
 <body>
-    <!-- Canvas for the Solar System -->
     <canvas id="solar-system-canvas"></canvas>
 
     <!-- Info Panel for displaying planet details -->
     <div id="info-panel">
         <button id="close-btn" onclick="hidePlanetInfo()">X</button>
         <h1 id="planet-name"></h1>
-        
-        <!-- Planet details with short and full descriptions -->
         <p id="planet-details">
             <span id="short-description"></span>
             <span id="full-description" style="display: none;"></span>
-            
-            <!-- 'Read more' and 'Read less' links -->
             <a href="#" id="read-more" onclick="expandDescription(event)">Read more</a>
             <a href="#" id="read-less" onclick="collapseDescription(event)" style="display: none;">Read less</a>
         </p>
     </div>
 
-<select id="planet-select" onchange="zoomToPlanet(this.value)">
-    <option value="">Select a planet</option>
-    <option value="Sun">Sun</option>
-    <option value="Mercury">Mercury</option>
-    <option value="Venus">Venus</option>
-    <option value="Earth">Earth</option>
-    <option value="Mars">Mars</option>
-    <option value="Jupiter">Jupiter</option>
-    <option value="Saturn">Saturn</option>
-    <option value="Uranus">Uranus</option>
-    <option value="Neptune">Neptune</option>
-</select>
+    <!-- Dropdown for planet selection -->
+    <select id="planet-select" onchange="zoomToPlanet(this.value)">
+        <option value="">Select a planet</option>
+        <option value="Sun">Sun</option>
+        <option value="Mercury">Mercury</option>
+        <option value="Venus">Venus</option>
+        <option value="Earth">Earth</option>
+        <option value="Mars">Mars</option>
+        <option value="Jupiter">Jupiter</option>
+        <option value="Saturn">Saturn</option>
+        <option value="Uranus">Uranus</option>
+        <option value="Neptune">Neptune</option>
+    </select>
     
-    <!-- JavaScript to handle interactions and display logic -->
     <script src="script.js"></script>
 </body>
 </html>
