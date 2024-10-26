@@ -161,21 +161,6 @@ function animate() {
     renderer.render(scene, camera);
 }
 
-// Animation loop
-function animate() {
-    requestAnimationFrame(animate);
-
-    planets.forEach((planet) => {
-        if (planet.distance > 0) {
-            planet.mesh.userData.angle += planet.speed;
-            planet.mesh.position.x = Math.cos(planet.mesh.userData.angle) * planet.distance;
-            planet.mesh.position.z = Math.sin(planet.mesh.userData.angle) * planet.distance;
-            planet.mesh.rotation.y += 0.01;
-        }
-    });
-
-    renderer.render(scene, camera);
-}
 
 animate();
 
