@@ -65,8 +65,8 @@ canvas {
   cursor: pointer;
 }
 
-/* Styling for the 'Read more' link */
-#info-panel a#read-more {
+/* Styling for the 'Read more' and 'Read less' links */
+#info-panel a#read-more, #info-panel a#read-less {
   color: #0f9dff; /* Light blue for visibility */
   cursor: pointer;
   font-size: 0.9em;
