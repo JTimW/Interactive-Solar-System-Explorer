@@ -37,7 +37,7 @@ canvas {
   margin-top: 10px;
 }
 
-/* Make it responsive on mobile devices */
+/* Responsive design for mobile */
 @media (max-width: 600px) {
   #info-panel {
     top: 10px;
