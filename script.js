@@ -119,6 +119,12 @@ const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 window.addEventListener('click', (event) => {
+    const infoPanel = document.getElementById('info-panel');
+
+    // Ignore clicks within the info panel itself
+    if (infoPanel.contains(event.target)) {
+        return;
+    }
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
