@@ -33,7 +33,7 @@ scene.add(ambientLight);
 
 // Planet data
 const planetsData = [
-    { name: "Sun", size: 3, distance: 0, speed: 0, color : load('assets/sun_texture.jpg'},
+    { name: "Sun", size: 3, distance: 0, speed: 0, color : load('assets/sun_texture.jpg')},
     { name: "Mercury", size: 0.3, distance: 5, speed: 0.004 },
     { name: "Venus", size: 0.6, distance: 7, speed: 0.003 },
     { name: "Earth", size: 0.7, distance: 10, speed: 0.002 },
