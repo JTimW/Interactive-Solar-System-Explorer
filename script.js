@@ -49,7 +49,7 @@ const planets = planetsData.map((planetData) => {
     const geometry = new THREE.SphereGeometry(planetData.size, 32, 32);
     const material = planetData.name === "Sun" 
         ? new THREE.MeshStandardMaterial({ 
-              emissive: textureLoader.load('assets/sun_texture.jpg'),
+              emissive: 0xffff00,
               emissiveIntensity: 2   // You can adjust this for desired glow level
           }) 
         : new THREE.MeshStandardMaterial({ map: planetTextures[planetData.name] });
