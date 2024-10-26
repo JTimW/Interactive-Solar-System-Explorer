@@ -73,7 +73,7 @@ const planets = planetsData.map((planetData) => {
         const ringGeometry = new THREE.RingGeometry(planetData.size + 0.5, planetData.size + 1, 32);
 
         // Load the texture for Saturn's ring
-        const ringTexture = textureLoader.load('path/to/saturnRing_texture.png'); // Specify the correct path to texture file
+        const ringTexture = textureLoader.load('assets/saturnRing_texture.jpg'); // Specify the correct path to texture file
         // Apply the texture to the material
         const ringMaterial = new THREE.MeshBasicMaterial({
             map: ringTexture,
@@ -88,7 +88,7 @@ const planets = planetsData.map((planetData) => {
         mesh.add(ring);
         
     } else if (planetData.name === "Neptune") {
-        const ringGeometry = new THREE.RingGeometry(planetData.size + 0.1, planetData.size + 0.2, 32);
+        const ringGeometry = new THREE.RingGeometry(planetData.size + 0.1, planetData.size + 0.25, 32);
         const ringMaterial = new THREE.MeshBasicMaterial({ 
             color: '#4B4B4F', 
             side: THREE.DoubleSide,
