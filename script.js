@@ -87,6 +87,46 @@ controls.enableZoom = true;
 controls.minDistance = 10;
 controls.maxDistance = 100;
 
+// Smooth zoom function to move camera to planet
+function zoomToPlanet(planetName) {
+    const selectedPlanet = planets.find(planet => planet.name === planetName);
+    if (!selectedPlanet) return; // Exit if no planet is selected
+
+    const targetPosition = new THREE.Vector3(
+        selectedPlanet.mesh.position.x,
+        selectedPlanet.mesh.position.y,
+        selectedPlanet.mesh.position.z + 5 // Offset to avoid zooming too close
+    );
+
+    // Create a tween for smooth camera transition
+    new TWEEN.Tween(camera.position)
+        .to({ x: targetPosition.x, y: targetPosition.y, z: targetPosition.z }, 2000) // Duration of 2 seconds
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .start();
+
+    // Update controls target if using OrbitControls
+    controls.target.copy(selectedPlanet.mesh.position);
+    controls.update();
+}
+
+// Include TWEEN.js animation update in the animation loop
+function animate() {
+    requestAnimationFrame(animate);
+
+    planets.forEach((planet) => {
+        if (planet.distance > 0) {
+            planet.mesh.userData.angle += planet.speed;
+            planet.mesh.position.x = Math.cos(planet.mesh.userData.angle) * planet.distance;
+            planet.mesh.position.z = Math.sin(planet.mesh.userData.angle) * planet.distance;
+            planet.mesh.rotation.y += 0.01;
+        }
+    });
+
+    TWEEN.update(); // Update TWEEN animations
+
+    renderer.render(scene, camera);
+}
+
 // Animation loop
 function animate() {
     requestAnimationFrame(animate);
